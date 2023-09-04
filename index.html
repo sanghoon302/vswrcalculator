@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VSWR Calculator for LTE </title>
+    <script>
+        function calculateVSWR() {
+            var returnLoss1 = parseFloat(document.getElementById("returnLoss1").value);
+            var returnLoss2 = parseFloat(document.getElementById("returnLoss2").value);
+
+            if (!isNaN(returnLoss1) && !isNaN(returnLoss2)) {
+                var vswr1 = (1 + Math.pow(10, returnLoss1 / 20)) / -(1 - Math.pow(10, returnLoss1 / 20));
+                var vswr2 = (1 + Math.pow(10, returnLoss2 / 20)) / -(1 - Math.pow(10, returnLoss2 / 20));
+
+                document.getElementById("vswrResult1").innerHTML = "A Path: " + vswr1.toFixed(2);
+                document.getElementById("vswrResult2").innerHTML = "B Path: " + vswr2.toFixed(2);
+            } else {
+                document.getElementById("vswrResult1").innerHTML = "ReturnLoss값을 입력해주세요.";
+                document.getElementById("vswrResult2").innerHTML = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>VSWR Calculator for LTE</h1>
+    <label for="returnLoss1">A path ReturnLoss (in dB):</label>
+    <input type="text" id="returnLoss1"><br>
+    <label for="returnLoss2">B path ReturnLoss (in dB):</label>
+    <input type="text" id="returnLoss2"><br>
+    <button onclick="calculateVSWR()">계산하기</button>
+    <p id="vswrResult1"></p>
+    <p id="vswrResult2"></p>
+</body>
+</html>
